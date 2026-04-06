@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You</title>
+<title>FROM SATYA</title>
 
 <style>
 body {
@@ -16,39 +16,63 @@ body {
   overflow: hidden;
 }
 
+/* 💖 floating hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 18px;
+  color: #ff7a8a;
+  animation: floatUp linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 0.7; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
 /* 💌 envelope */
 .envelope {
   width: 220px;
   height: 140px;
-  background: white;
+  background: #fff;
   position: relative;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  transition: 0.5s;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
 }
 
-.envelope:hover {
-  transform: scale(1.05);
-}
-
-/* flap */
+/* ✉️ flap FIXED */
 .flap {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 0;
   height: 0;
   border-left: 110px solid transparent;
   border-right: 110px solid transparent;
-  border-bottom: 70px solid #ffdada;
-  top: -70px;
+  border-top: 70px solid #ffdada; /* flipped direction */
   transform-origin: top;
-  transition: 1s;
+  transition: transform 0.8s ease;
+}
+
+/* back triangle (for depth) */
+.flap::after {
+  content: "";
+  position: absolute;
+  top: -70px;
+  left: -110px;
+  border-left: 110px solid transparent;
+  border-right: 110px solid transparent;
+  border-bottom: 70px solid #ffe5e5;
+  z-index: -1;
 }
 
 .open .flap {
   transform: rotateX(180deg);
 }
 
-/* hide envelope */
+/* hide */
 .hide {
   opacity: 0;
   transition: 1s;
@@ -81,7 +105,7 @@ p {
   line-height: 1.7;
 }
 
-/* image */
+/* 🖼️ image */
 img {
   width: 90%;
   max-width: 450px;
@@ -89,7 +113,7 @@ img {
   margin: 20px 0;
 }
 
-/* music smaller */
+/* 🎵 music */
 .music {
   max-width: 300px;
   margin: 30px auto;
@@ -114,16 +138,21 @@ iframe {
   <h1>For You</h1>
 
   <p>
-    HI MANNN <br><br>
-    imma miss you so so much... thank you for everything. thank you for being my friend. alam mo thankful akong nameet kita kasi para sakin mas naging madali senior high ko. kabado ako nung nagtransfer ako pero wala akong choise kasi alam mo na. natatakot akong majudge sa appearance ko and di magkaroon ng new friends.
-    pero u, you're gentle n so so kind. i can say that you're my comfort person. pansin mo ba, sayo ako laging nagsusumbong pag may nararamdaman ako or may problema. kasi alam kong di mo ako ijjudge. i love how your looks of gentleness is the same with who you truly are inside.
-    i know that you'll do great sa kung ano man matatahak mo in the future. i will always believe in you and support you. kung may problema ka man or what, kahit na small pa yan or big.. yk im js one call away. i'll do my best to help and be there for u. same w your success and achievements,
-    small man yan or big, i'll celebrate it w u extravagantly. salamat sa lahat, i promise to cherish our memories forever, hanggang sa aking grave lmao. i will never forget you, you're my bestfriend forEVER. kahit na alam ko marami pa akong mammeet na tao, magsstay ka sa puso ko. 
-    lahat ng memories natin ay magsstay saakin. salamat for making my gpc journey fun. feeling ko isa ka rin sa mga taong nakahelp saaking maovercome ang depression. salamat man. i wish you all the best. ingat ka palagi. mahal na mahal kita<br>
+    For Lyza <br><br>
+    imma miss you so so much... thank you for everything. thank you for being my friend. alam mo thankful akong nameet kita kasi para sakin mas naging madali
+    senior high ko. kabado ako nung nagtransfer ako pero wala akong choise kasi alam mo na. natatakot akong majudge sa appearance ko and di magkaroon ng new friends.
+    pero u, you're gentle n so so kind. i can say that you're my comfort person. pansin mo ba, sayo ako laging nagsusumbong pag may nararamdaman ako or may problema. 
+    kasi alam kong di mo ako ijjudge. i love how your looks of gentleness is the same with who you truly are inside.
+    i know that you'll do great sa kung ano man matatahak mo in the future. i will always believe in you and support you. kung may problema ka man or what, kahit na 
+    small pa yan or big.. yk im js one call away. i'll do my best to help and be there for u. same w your success and achievements,
+    small man yan or big, i'll celebrate it w u extravagantly. salamat sa lahat, i promise to cherish our memories forever, hanggang sa aking grave lmao. i will never 
+    forget you, you're my bestfriend forEVER. kahit na alam ko marami pa akong mammeet na tao, magsstay ka sa puso ko. 
+    lahat ng memories natin ay magsstay saakin. salamat for making my gpc journey fun. feeling ko isa ka rin sa mga taong nakahelp saaking maovercome ang depression. 
+    salamat man. i wish you all the best. ingat ka palagi. mahal na mahal kita<br>
 
   </p>
 
-  <img src="ce0918b8-818f-404b-84ee-d5d86ff44f58">
+  <img src="photo.jpg">
 
   <p>
     no matter where life takes us,<br>
@@ -137,6 +166,23 @@ iframe {
 </div>
 
 <script>
+/* 💖 floating hearts generator (always running) */
+function createHearts() {
+  let heart = document.createElement("div");
+  heart.innerHTML = "♥";
+  heart.className = "heart";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 7000);
+}
+
+setInterval(createHearts, 400);
+
+/* 💌 open letter */
 function openLetter() {
   let env = document.getElementById("env");
   env.classList.add("open");
