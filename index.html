@@ -107,6 +107,8 @@ body {
   overflow-y: auto;
   padding: 40px 20px;
   text-align: center;
+
+  box-sizing: border-box; /* ⭐ IMPORTANT */
 }
 
 .show {
@@ -118,6 +120,9 @@ h1 { color: #b85c5c; }
 p {
   font-size: 18px;
   line-height: 1.7;
+  max-width: 600px;   /* keeps text readable */
+  margin: auto;       /* centers it */
+  word-wrap: break-word;
 }
 
 img {
@@ -137,7 +142,19 @@ iframe {
   height: 170px;
   border: none;
 }
+  
+<style>
+/* all your existing CSS above */
+
+/* 📱 mobile fix */
+@media (max-width: 500px) {
+  p {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+}
 </style>
+  
 </head>
 
 <body>
