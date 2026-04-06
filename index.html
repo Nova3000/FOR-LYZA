@@ -16,9 +16,9 @@ body {
 .heart {
   position: fixed;
   bottom: -10px;
-  font-size: 20px;
+  font-size: 18px;
   animation: floatUp 6s linear infinite;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 @keyframes floatUp {
@@ -39,6 +39,7 @@ body {
   text-align: center;
   line-height: 140px;
   font-weight: bold;
+  border-radius: 10px;
 }
 
 /* letter */
@@ -59,14 +60,33 @@ body {
   display: block;
 }
 
+h1 {
+  color: #b85c5c;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* 🖼️ image FIX */
 img {
   width: 90%;
-  max-width: 500px;
-  border-radius: 10px;
+  max-width: 450px;
+  border-radius: 12px;
   margin: 20px 0;
+  object-fit: cover;
+}
+
+/* 🎵 smaller music */
+.music {
+  max-width: 300px;
+  margin: 30px auto;
 }
 
 iframe {
+  width: 100%;
+  height: 170px;
   border: none;
 }
 </style>
@@ -79,7 +99,8 @@ iframe {
 </div>
 
 <div id="letter" class="letter">
-  <h1 style="color:#b85c5c;">For You</h1>
+
+  <h1>For You</h1>
 
   <p>
     hey you,<br><br>
@@ -87,17 +108,21 @@ iframe {
     all the memories we made mean so much to me.
   </p>
 
-  <img src="./photo1.jpg" alt="memory">
+  <!-- ⚠️ MAKE SURE THIS NAME MATCHES YOUR FILE -->
+  <img src="photo.jpg" alt="memory">
 
   <p>
     no matter where life takes us,<br>
     i’ll always remember you 🤍
   </p>
 
-  <iframe width="90%" height="220"
-  src="https://www.youtube.com/embed/YZM9-uNZZgw?rel=0"
-  allowfullscreen>
-  </iframe>
+  <div class="music">
+    <iframe 
+      src="https://www.youtube.com/embed/YZM9-uNZZgw?rel=0"
+      allowfullscreen>
+    </iframe>
+  </div>
+
 </div>
 
 <script>
@@ -105,8 +130,8 @@ function openLetter() {
   document.querySelector(".envelope").style.display = "none";
   document.getElementById("letter").classList.add("show");
 
-  // create hearts
-  for (let i = 0; i < 20; i++) {
+  // 💖 create floating hearts
+  for (let i = 0; i < 25; i++) {
     let heart = document.createElement("div");
     heart.innerHTML = "♥";
     heart.className = "heart";
