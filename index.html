@@ -9,48 +9,60 @@ body {
   margin: 0;
   background: linear-gradient(135deg, #ffeaea, #fff);
   font-family: Georgia, serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   overflow: hidden;
 }
 
-/* 💖 floating hearts */
-.heart {
-  position: fixed;
-  bottom: -10px;
-  font-size: 18px;
-  animation: floatUp 6s linear infinite;
-  opacity: 0.5;
-}
-
-@keyframes floatUp {
-  0% { transform: translateY(0); opacity: 0; }
-  50% { opacity: 0.7; }
-  100% { transform: translateY(-100vh); opacity: 0; }
-}
-
-/* envelope */
+/* 💌 envelope */
 .envelope {
   width: 220px;
   height: 140px;
   background: white;
-  margin: auto;
-  margin-top: 40vh;
+  position: relative;
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  text-align: center;
-  line-height: 140px;
-  font-weight: bold;
-  border-radius: 10px;
+  transition: 0.5s;
 }
 
-/* letter */
+.envelope:hover {
+  transform: scale(1.05);
+}
+
+/* flap */
+.flap {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 110px solid transparent;
+  border-right: 110px solid transparent;
+  border-bottom: 70px solid #ffdada;
+  top: -70px;
+  transform-origin: top;
+  transition: 1s;
+}
+
+.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* hide envelope */
+.hide {
+  opacity: 0;
+  transition: 1s;
+}
+
+/* 💖 letter */
 .letter {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: #fff;
+  display: none;
   overflow-y: auto;
   padding: 40px 20px;
   text-align: center;
@@ -69,16 +81,15 @@ p {
   line-height: 1.7;
 }
 
-/* 🖼️ image FIX */
+/* image */
 img {
   width: 90%;
   max-width: 450px;
   border-radius: 12px;
   margin: 20px 0;
-  object-fit: cover;
 }
 
-/* 🎵 smaller music */
+/* music smaller */
 .music {
   max-width: 300px;
   margin: 30px auto;
@@ -94,8 +105,8 @@ iframe {
 
 <body>
 
-<div class="envelope" onclick="openLetter()">
-  open me 💌
+<div class="envelope" id="env" onclick="openLetter()">
+  <div class="flap"></div>
 </div>
 
 <div id="letter" class="letter">
@@ -103,13 +114,16 @@ iframe {
   <h1>For You</h1>
 
   <p>
-    hey you,<br><br>
-    i’m really going to miss you.<br>
-    all the memories we made mean so much to me.
+    HI MANNN <br><br>
+    imma miss you so so much... thank you for everything. thank you for being my friend. alam mo thankful akong nameet kita kasi para sakin mas naging madali senior high ko. kabado ako nung nagtransfer ako pero wala akong choise kasi alam mo na. natatakot akong majudge sa appearance ko and di magkaroon ng new friends.
+    pero u, you're gentle n so so kind. i can say that you're my comfort person. pansin mo ba, sayo ako laging nagsusumbong pag may nararamdaman ako or may problema. kasi alam kong di mo ako ijjudge. i love how your looks of gentleness is the same with who you truly are inside.
+    i know that you'll do great sa kung ano man matatahak mo in the future. i will always believe in you and support you. kung may problema ka man or what, kahit na small pa yan or big.. yk im js one call away. i'll do my best to help and be there for u. same w your success and achievements,
+    small man yan or big, i'll celebrate it w u extravagantly. salamat sa lahat, i promise to cherish our memories forever, hanggang sa aking grave lmao. i will never forget you, you're my bestfriend forEVER. kahit na alam ko marami pa akong mammeet na tao, magsstay ka sa puso ko. 
+    lahat ng memories natin ay magsstay saakin. salamat for making my gpc journey fun. feeling ko isa ka rin sa mga taong nakahelp saaking maovercome ang depression. salamat man. i wish you all the best. ingat ka palagi. mahal na mahal kita<br>
+
   </p>
 
-  <!-- ⚠️ MAKE SURE THIS NAME MATCHES YOUR FILE -->
-  <img src="photo.jpg" alt="memory">
+  <img src="ce0918b8-818f-404b-84ee-d5d86ff44f58">
 
   <p>
     no matter where life takes us,<br>
@@ -117,28 +131,23 @@ iframe {
   </p>
 
   <div class="music">
-    <iframe 
-      src="https://www.youtube.com/embed/YZM9-uNZZgw?rel=0"
-      allowfullscreen>
-    </iframe>
+    <iframe src="https://www.youtube.com/embed/YZM9-uNZZgw?rel=0" allowfullscreen></iframe>
   </div>
 
 </div>
 
 <script>
 function openLetter() {
-  document.querySelector(".envelope").style.display = "none";
-  document.getElementById("letter").classList.add("show");
+  let env = document.getElementById("env");
+  env.classList.add("open");
 
-  // 💖 create floating hearts
-  for (let i = 0; i < 25; i++) {
-    let heart = document.createElement("div");
-    heart.innerHTML = "♥";
-    heart.className = "heart";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (4 + Math.random() * 3) + "s";
-    document.body.appendChild(heart);
-  }
+  setTimeout(() => {
+    env.classList.add("hide");
+  }, 800);
+
+  setTimeout(() => {
+    document.getElementById("letter").classList.add("show");
+  }, 1200);
 }
 </script>
 
