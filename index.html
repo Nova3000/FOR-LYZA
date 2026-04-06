@@ -7,92 +7,65 @@
 <style>
 body {
   margin: 0;
-  background: linear-gradient(135deg, #fceeee, #fff6f6);
+  background: linear-gradient(135deg, #ffeaea, #fff);
   font-family: Georgia, serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   overflow: hidden;
 }
 
-/* Envelope */
+/* 💖 floating hearts */
+.heart {
+  position: fixed;
+  bottom: -10px;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 0.7; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* envelope */
 .envelope {
   width: 220px;
   height: 140px;
-  background: #ffffff;
-  position: relative;
+  background: white;
+  margin: auto;
+  margin-top: 40vh;
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  transition: 0.5s;
+  text-align: center;
+  line-height: 140px;
+  font-weight: bold;
 }
 
-.envelope:hover {
-  transform: scale(1.05);
-}
-
-.hide {
-  opacity: 0;
-}
-
-/* Flap */
-.flap {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 110px solid transparent;
-  border-right: 110px solid transparent;
-  border-bottom: 70px solid #ffdada;
-  top: -70px;
-  transition: 1s;
-}
-
-.open .flap {
-  transform: rotateX(180deg);
-}
-
-/* Letter */
-.letter-full {
+/* letter */
+.letter {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: #fff;
-  display: none;
   overflow-y: auto;
   padding: 40px 20px;
+  text-align: center;
 }
 
 .show {
   display: block;
 }
 
-.content {
-  max-width: 600px;
-  margin: auto;
-  text-align: center;
-}
-
-h1 {
-  color: #b85c5c;
-}
-
-p {
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-/* Image fix */
 img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
+  width: 90%;
+  max-width: 500px;
   border-radius: 10px;
   margin: 20px 0;
 }
 
-/* iframe fix */
 iframe {
   border: none;
 }
@@ -101,44 +74,46 @@ iframe {
 
 <body>
 
-<div class="envelope" id="env" onclick="openLetter()">
-  <div class="flap"></div>
+<div class="envelope" onclick="openLetter()">
+  open me 💌
 </div>
 
-<div id="letter" class="letter-full">
-  <div class="content">
+<div id="letter" class="letter">
+  <h1 style="color:#b85c5c;">For You</h1>
 
-    <h1>For You</h1>
+  <p>
+    hey you,<br><br>
+    i’m really going to miss you.<br>
+    all the memories we made mean so much to me.
+  </p>
 
-    <p>
-      hey you,<br><br>
-      i’m really going to miss you.<br>
-      all the memories we made mean so much to me.
-    </p>
+  <img src="./photo1.jpg" alt="memory">
 
-    <img src="photo1.jpg" alt="memory">
+  <p>
+    no matter where life takes us,<br>
+    i’ll always remember you 🤍
+  </p>
 
-    <p>
-      no matter where life takes us,<br>
-      i’ll always remember you 🤍
-    </p>
-
-    <iframe width="100%" height="200"
-      src="https://www.youtube.com/embed/YZM9-uNZZgw"
-      allowfullscreen>
-    </iframe>
-
-  </div>
+  <iframe width="90%" height="220"
+  src="https://www.youtube.com/embed/YZM9-uNZZgw?rel=0"
+  allowfullscreen>
+  </iframe>
 </div>
 
 <script>
 function openLetter() {
-  var env = document.getElementById("env");
-  env.classList.add("hide");
+  document.querySelector(".envelope").style.display = "none";
+  document.getElementById("letter").classList.add("show");
 
-  setTimeout(function() {
-    document.getElementById("letter").classList.add("show");
-  }, 500);
+  // create hearts
+  for (let i = 0; i < 20; i++) {
+    let heart = document.createElement("div");
+    heart.innerHTML = "♥";
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+  }
 }
 </script>
 
