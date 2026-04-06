@@ -6,7 +6,7 @@
   <style>
     body {
       margin: 0;
-      background: #ffffff;
+      background: linear-gradient(135deg, #fceeee, #fff6f6);
       font-family: 'Georgia', serif;
       display: flex;
       justify-content: center;
@@ -15,95 +15,88 @@
       overflow: hidden;
     }
 
-    /* ✨ Floating aesthetic glow */
-    body::before {
-      content: "";
+    /* ✨ Floating hearts */
+    .heart {
       position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(#5a2a27, transparent);
-      top: 10%;
-      left: 20%;
-      opacity: 0.2;
-      filter: blur(60px);
+      color: #ff6b81;
+      font-size: 20px;
+      animation: float 6s linear infinite;
+      opacity: 0.6;
     }
 
-    body::after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(#7b3f3f, transparent);
-      bottom: 10%;
-      right: 20%;
-      opacity: 0.2;
-      filter: blur(60px);
+    @keyframes float {
+      0% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+      50% { opacity: 0.6; }
+      100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
     }
 
-    /* 📩 Envelope */
+    /* Envelope */
     .envelope {
-  width: 220px;
-  height: 140px;
-  background: white;
-  position: relative;
-  cursor: pointer;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-  transition: transform 0.5s, opacity 1s ease;
-  z-index: 2;
-}
-    
-    .hide {
-  opacity: 0;
-  pointer-events: none;
-}
-    
-    .envelope:hover {
-      transform: scale(1.05);
+      width: 220px;
+      height: 140px;
+      background: white;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      transition: transform 0.5s, opacity 1s ease;
+      z-index: 2;
+      border-radius: 10px;
     }
 
-    /* Flap */
+    .hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .envelope:hover {
+      transform: scale(1.08);
+    }
+
     .flap {
       position: absolute;
       width: 0;
       height: 0;
       border-left: 110px solid transparent;
       border-right: 110px solid transparent;
-      border-bottom: 70px solid #eee;
+      border-bottom: 70px solid #ffe3e3;
       top: -70px;
       transform-origin: top;
       transition: transform 1s ease;
-      z-index: 3;
     }
 
     .open .flap {
       transform: rotateX(180deg);
     }
 
-    /* 📜 Letter */
     .letter-paper {
       position: absolute;
       width: 90%;
       height: 120px;
-      background: white;
+      background: #fff;
       top: 10px;
       left: 5%;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       transition: all 1s ease;
-      z-index: 1;
     }
 
     .open .letter-paper {
       transform: translateY(-200px) scale(1.1);
     }
 
-    /* FULL SCREEN LETTER */
+    /* FULL LETTER */
     .letter-full {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: white;
+      background: linear-gradient(#fff, #ffecec);
       display: none;
       overflow-y: auto;
       padding: 50px 20px;
@@ -120,7 +113,6 @@
       to {opacity: 1;}
     }
 
-    /* CONTENT STYLE */
     .content {
       max-width: 650px;
       margin: auto;
@@ -140,21 +132,24 @@
     }
 
     h1 {
-      color: #5a2a27;
+      color: #b85c5c;
       margin-bottom: 20px;
     }
 
     p {
-      color: #333;
-      line-height: 1.7;
+      color: #444;
+      line-height: 1.8;
       font-size: 18px;
     }
 
+    /* FIXED IMAGE */
     img {
       width: 100%;
-      border-radius: 12px;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 15px;
       margin: 25px 0;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
 
     .song {
@@ -165,6 +160,13 @@
 </head>
 
 <body>
+
+<!-- floating hearts -->
+<div class="heart" style="left:10%">♥</div>
+<div class="heart" style="left:30%">♥</div>
+<div class="heart" style="left:50%">♥</div>
+<div class="heart" style="left:70%">♥</div>
+<div class="heart" style="left:90%">♥</div>
 
 <div class="envelope" id="env" onclick="openLetter()">
   <div class="flap"></div>
@@ -177,19 +179,23 @@
     <h1>For You</h1>
 
     <p>
-      HI MAN<br><br>
-      IMMA MISS U SO MUCH
+      hey you,<br><br>
+      i just wanted to say that i’m really going to miss you.  
+      all the moments, the laughs, everything we shared—  
+      i’ll keep them with me always.
     </p>
 
-    <img src="photo1.jpg">
+    <img src="photo1.jpg" alt="memory">
 
     <p>
-      I HOPE NA THIS WORKS
+      i hope wherever life takes us,  
+      you stay happy and remember that  
+      you mattered a lot to me 🤍
     </p>
 
     <div class="song">
       <iframe width="100%" height="166"
-      src="https://youtu.be/YZM9-uNZZgw?si=Xmbj4s-Y3HOz8SvZ"
+      src="https://www.youtube.com/embed/YZM9-uNZZgw"
       frameborder="0" allowfullscreen></iframe>
     </div>
 
@@ -201,12 +207,10 @@
     let env = document.getElementById("env");
     env.classList.add("open");
 
-    // fade out envelope after opening
     setTimeout(() => {
       env.classList.add("hide");
     }, 1000);
 
-    // show full letter after
     setTimeout(() => {
       document.getElementById("letter").classList.add("show");
     }, 1300);
