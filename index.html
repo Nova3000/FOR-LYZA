@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For You</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #ffffff;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ✨ Floating aesthetic glow */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(#5a2a27, transparent);
+      top: 10%;
+      left: 20%;
+      opacity: 0.2;
+      filter: blur(60px);
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(#7b3f3f, transparent);
+      bottom: 10%;
+      right: 20%;
+      opacity: 0.2;
+      filter: blur(60px);
+    }
+
+    /* 📩 Envelope */
+    .envelope {
+  width: 220px;
+  height: 140px;
+  background: white;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  transition: transform 0.5s, opacity 1s ease;
+  z-index: 2;
+}
+    
+    .hide {
+  opacity: 0;
+  pointer-events: none;
+}
+    
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    /* Flap */
+    .flap {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 110px solid transparent;
+      border-right: 110px solid transparent;
+      border-bottom: 70px solid #eee;
+      top: -70px;
+      transform-origin: top;
+      transition: transform 1s ease;
+      z-index: 3;
+    }
+
+    .open .flap {
+      transform: rotateX(180deg);
+    }
+
+    /* 📜 Letter */
+    .letter-paper {
+      position: absolute;
+      width: 90%;
+      height: 120px;
+      background: white;
+      top: 10px;
+      left: 5%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 1s ease;
+      z-index: 1;
+    }
+
+    .open .letter-paper {
+      transform: translateY(-200px) scale(1.1);
+    }
+
+    /* FULL SCREEN LETTER */
+    .letter-full {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: none;
+      overflow-y: auto;
+      padding: 50px 20px;
+      box-sizing: border-box;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .show {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* CONTENT STYLE */
+    .content {
+      max-width: 650px;
+      margin: auto;
+      text-align: center;
+      animation: floatUp 1.5s ease;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      color: #5a2a27;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #333;
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 25px 0;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .song {
+      margin-top: 40px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="envelope" id="env" onclick="openLetter()">
+  <div class="flap"></div>
+  <div class="letter-paper"></div>
+</div>
+
+<div id="letter" class="letter-full">
+  <div class="content">
+
+    <h1>For You</h1>
+
+    <p>
+      HI MAN<br><br>
+      IMMA MISS U SO MUCH
+    </p>
+
+    <img src="photo1.jpg">
+
+    <p>
+      I HOPE NA THIS WORKS
+    </p>
+
+    <div class="song">
+      <iframe width="100%" height="166"
+      src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+      frameborder="0" allowfullscreen></iframe>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function openLetter() {
+    let env = document.getElementById("env");
+    env.classList.add("open");
+
+    // fade out envelope after opening
+    setTimeout(() => {
+      env.classList.add("hide");
+    }, 1000);
+
+    // show full letter after
+    setTimeout(() => {
+      document.getElementById("letter").classList.add("show");
+    }, 1300);
+  }
+</script>
+
+</body>
+</html>
