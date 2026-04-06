@@ -1,176 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>For You</title>
+<meta charset="UTF-8">
+<title>For You</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: linear-gradient(135deg, #fceeee, #fff6f6);
-      font-family: 'Georgia', serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #fceeee, #fff6f6);
+  font-family: Georgia, serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
 
-    /* ✨ Floating hearts */
-    .heart {
-      position: absolute;
-      color: #ff6b81;
-      font-size: 20px;
-      animation: float 6s linear infinite;
-      opacity: 0.6;
-    }
+/* Envelope */
+.envelope {
+  width: 220px;
+  height: 140px;
+  background: #ffffff;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  transition: 0.5s;
+}
 
-    @keyframes float {
-      0% {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-      50% { opacity: 0.6; }
-      100% {
-        transform: translateY(-10vh);
-        opacity: 0;
-      }
-    }
+.envelope:hover {
+  transform: scale(1.05);
+}
 
-    /* Envelope */
-    .envelope {
-      width: 220px;
-      height: 140px;
-      background: white;
-      position: relative;
-      cursor: pointer;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-      transition: transform 0.5s, opacity 1s ease;
-      z-index: 2;
-      border-radius: 10px;
-    }
+.hide {
+  opacity: 0;
+}
 
-    .hide {
-      opacity: 0;
-      pointer-events: none;
-    }
+/* Flap */
+.flap {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 110px solid transparent;
+  border-right: 110px solid transparent;
+  border-bottom: 70px solid #ffdada;
+  top: -70px;
+  transition: 1s;
+}
 
-    .envelope:hover {
-      transform: scale(1.08);
-    }
+.open .flap {
+  transform: rotateX(180deg);
+}
 
-    .flap {
-      position: absolute;
-      width: 0;
-      height: 0;
-      border-left: 110px solid transparent;
-      border-right: 110px solid transparent;
-      border-bottom: 70px solid #ffe3e3;
-      top: -70px;
-      transform-origin: top;
-      transition: transform 1s ease;
-    }
+/* Letter */
+.letter-full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: none;
+  overflow-y: auto;
+  padding: 40px 20px;
+}
 
-    .open .flap {
-      transform: rotateX(180deg);
-    }
+.show {
+  display: block;
+}
 
-    .letter-paper {
-      position: absolute;
-      width: 90%;
-      height: 120px;
-      background: #fff;
-      top: 10px;
-      left: 5%;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      transition: all 1s ease;
-    }
+.content {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
 
-    .open .letter-paper {
-      transform: translateY(-200px) scale(1.1);
-    }
+h1 {
+  color: #b85c5c;
+}
 
-    /* FULL LETTER */
-    .letter-full {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(#fff, #ffecec);
-      display: none;
-      overflow-y: auto;
-      padding: 50px 20px;
-      box-sizing: border-box;
-      animation: fadeIn 1.5s ease;
-    }
+p {
+  font-size: 18px;
+  line-height: 1.6;
+}
 
-    .show {
-      display: block;
-    }
+/* Image fix */
+img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 20px 0;
+}
 
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    .content {
-      max-width: 650px;
-      margin: auto;
-      text-align: center;
-      animation: floatUp 1.5s ease;
-    }
-
-    @keyframes floatUp {
-      from {
-        transform: translateY(40px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    h1 {
-      color: #b85c5c;
-      margin-bottom: 20px;
-    }
-
-    p {
-      color: #444;
-      line-height: 1.8;
-      font-size: 18px;
-    }
-
-    /* FIXED IMAGE */
-    img {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 15px;
-      margin: 25px 0;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
-
-    .song {
-      margin-top: 40px;
-    }
-
-  </style>
+/* iframe fix */
+iframe {
+  border: none;
+}
+</style>
 </head>
 
 <body>
 
-<!-- floating hearts -->
-<div class="heart" style="left:10%">♥</div>
-<div class="heart" style="left:30%">♥</div>
-<div class="heart" style="left:50%">♥</div>
-<div class="heart" style="left:70%">♥</div>
-<div class="heart" style="left:90%">♥</div>
-
 <div class="envelope" id="env" onclick="openLetter()">
   <div class="flap"></div>
-  <div class="letter-paper"></div>
 </div>
 
 <div id="letter" class="letter-full">
@@ -180,41 +112,34 @@
 
     <p>
       hey you,<br><br>
-      i just wanted to say that i’m really going to miss you.  
-      all the moments, the laughs, everything we shared—  
-      i’ll keep them with me always.
+      i’m really going to miss you.<br>
+      all the memories we made mean so much to me.
     </p>
 
     <img src="photo1.jpg" alt="memory">
 
     <p>
-      i hope wherever life takes us,  
-      you stay happy and remember that  
-      you mattered a lot to me 🤍
+      no matter where life takes us,<br>
+      i’ll always remember you 🤍
     </p>
 
-    <div class="song">
-      <iframe width="100%" height="166"
+    <iframe width="100%" height="200"
       src="https://www.youtube.com/embed/YZM9-uNZZgw"
-      frameborder="0" allowfullscreen></iframe>
-    </div>
+      allowfullscreen>
+    </iframe>
 
   </div>
 </div>
 
 <script>
-  function openLetter() {
-    let env = document.getElementById("env");
-    env.classList.add("open");
+function openLetter() {
+  var env = document.getElementById("env");
+  env.classList.add("hide");
 
-    setTimeout(() => {
-      env.classList.add("hide");
-    }, 1000);
-
-    setTimeout(() => {
-      document.getElementById("letter").classList.add("show");
-    }, 1300);
-  }
+  setTimeout(function() {
+    document.getElementById("letter").classList.add("show");
+  }, 500);
+}
 </script>
 
 </body>
